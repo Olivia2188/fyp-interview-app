@@ -1,0 +1,215 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    min-height: 100vh;
+    width: 100%;
+    margin: 0px;
+    background: linear-gradient(rgba(4, 9, 30, 0.3), rgba(27, 42, 107, 0.3)), url(../image/background-teacher.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.headerBox{
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgb(255, 255, 255, 0.6);
+}
+header{
+    font-size: 20px;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+.content-title h2{
+    padding-top: 10px;
+    font-size: 35px;
+    text-align: center;
+    color: aliceblue;
+}
+.selectionContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+}
+.selection{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    width: 300px;
+    height: 310px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    text-align: center;
+}
+.selection h3{
+    font-size: 27px;
+}
+.selection p{
+    font-size: 20px;
+    text-align: center;
+}
+.selectionimg img{
+    width: 150px;
+    height: 160px;
+    padding: 20px;
+}
+.selectionbtn button{
+    display: inline-block;
+    padding: 10px 25px;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 15px;
+    color: aliceblue;
+    background-color: #3e8e41;
+    box-shadow: 0 7px #909090;
+}
+.selectionbtn button:active{
+    color: black;
+    font-weight: bold;
+    background-color: rgb(208, 231, 203);
+    box-shadow: 0 5px #666;
+    transform: translateY(5px);
+}
+.popupWindow{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.popupContent{
+    position: relative;
+    background: whitesmoke;
+    width: 60%;
+    height: 70%;
+    padding: 30px;
+    border-radius: 8px;
+}
+.fa-times{
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+}
+.popupHeader p{
+    color: #666;
+    letter-spacing: 1px;
+}
+.uploadContainer{
+    border: 2px dashed grey;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.uploadArea{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+}
+.upload{
+    text-align: center;
+}
+.upload p{
+    font-size: 28px;
+}
+.uploadBtn{
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 18px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 15px;
+    color: aliceblue;
+    background-color: #3e8e41;
+    box-shadow: 0 7px #909090;
+}
+.uploadBtn:active{
+    color: black;
+    font-weight: bold;
+    background-color: rgb(208, 231, 203);
+    box-shadow: 0 5px #666;
+    transform: translateY(5px);
+}
+#fileInput{
+    display: none;
+}
+.questionContainer{
+    display: flex;
+    padding: 0 20px;
+    flex-direction: column;
+    width: 100%;
+    overflow: auto;
+}
+.popupActions{
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.downloadTemplate{
+    margin-right: auto;
+}
+.downloadTemplate img{
+    width: 50px;
+    height: 50px;
+}
+.popupBtn{
+    padding: 4px;
+}
+.popupbtnContainer{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+.popupBackbtn{
+    display: flex;
+    font-weight: 500;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 16px;
+    justify-content: center;
+    align-items: center;
+}
+.fa-arrow-left{
+    padding-right: 8px;
+}
+.actionsBtn{
+    display: flex;
+    justify-content: flex-end;
+    border: none;
+}
+.cancelBtn, 
+.importBtn{
+    display: flex;
+    font-weight: 500;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 16px;
+    justify-content: center;
+    align-items: center;
+}
+.cancelBtn{
+    margin-right: 8px;
+}

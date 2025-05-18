@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload from Excel</title>
+    <link rel="stylesheet" href="../static/css/method.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+<body>
+    <section class = "headerBox">
+        <header>Create a new Interview</header>
+    </section>
+    <section class = "content">
+        <div class="content-title">
+            <h2>Create a New Interview</h2>
+        </div>
+        <div class="selectionContainer">
+            <div class="selection">
+                <h3>Bring your own content</h3>
+                <p>Upload from an Excel file</p>
+                <div class="selectionimg">
+                    <img src="../static/image/excelIcon.png">
+                </div>
+                <div class="selectionbtn">
+                    <button onclick="showpopup()">Import Content</button>
+                </div>
+            </div>
+            <div class="selection">
+                <h3>Create from scratch</h3>
+                <p>Custom questions & rubrics</p>
+                <div class="selectionimg">
+                    <img src="../static/image/scratch.jpg">
+                </div>
+                <div class="selectionbtn">
+                    <button onclick="scratchpage()">Start creating</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="popupWindow">
+        <div class="popupContent">
+            <i class="fa fa-times" onclick="closepopup()"></i>
+            <div class="popupHeader">
+                <div class="popupTitle">
+                    <h2>Import questions from spreadsheet</h2>
+                    <p>Please upload an excel spreadsheet that follows the sample template</p>
+                </div>
+            </div>
+            <div class="uploadContainer">
+                <div class="uploadArea">
+                    <div class="upload">
+                        <p>Upload your spreadsheet</p>
+                        <input type="file" id="fileInput" accept=".xlsx, .xls"> <!--restricts to excel files only-->
+                        <button class="uploadBtn" onclick="uploadfile()">Choose file</button>
+                    </div>
+                    <div class="questionContainer"></div>
+                </div>
+            </div>
+            <div class="popupActions">
+                <div class="downloadTemplate">
+                    <div class="popupBtn">
+                        <div class="popupdownloadbtn">
+                            <a class="popupbtnContainer" href="../static/sample_questions.xlsx" download="SampleSpreadSheet">
+                                <img class="popupExcel" src="../static/image/excel-img.png">
+                                <span>Download template sample</span>
+                            </a>
+                        </div>
+                        <div class="popupbtnContainer">
+                            <button class="popupBackbtn" onclick="back()">
+                                <i class="fa fa-arrow-left"></i>
+                                <span>Back</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="actionsBtn">
+                    <button onclick="closepopup()" class="cancelBtn">Cancel</button>
+                    <button class="importBtn" disabled onclick="confirmImport()">Import</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../static/js/createQn-Method.js"></script>
+</body>
+</html>

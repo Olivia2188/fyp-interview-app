@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech to text</title>
+    <link rel="stylesheet" href="../static/css/student.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+    <section class = "headerBox">
+        <header>
+            <a href="{{url_for('index')}}"><img src="../static/image/logopic.png"></a>
+            <div id = "studentDetails">
+                <p>Name: <span id = "displayName"></span> (<span id = "displayAdmin"></span>)</p>
+                <p>Module code: <span id = "displayModule"></span></p>
+            </div>
+        </header>
+    </section>
+    <div id="mainContent">
+        <section class="question-container">
+            <div id="questionContent">
+                <div id="timerContainer">
+                    <div class="timerLabel">
+                        <i class="fa-regular fa-clock"></i>
+                        <span>Time Left:</span>
+                    </div>
+                    <div class="countdownContainer">
+                        <p id="countdown">00:00</p>
+                        <div class="progressBarBackground">
+                            <div id="progressBar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="questionBox"></div>
+            </div>
+        </section>
+        <section class="record-container">
+            <div id="recordSection">
+                <div class="send-data-component">
+                    <div class="send-data-img">
+                        <img src="../static/image/speaker.jpeg">
+                    </div>
+                    <div class="send-data-contain">
+                        <h2>Record and transcribe audio</h2>
+                    </div>
+                    <p id="status">Press "Start" to begin.</p>
+                </div>
+                <div class="btn-container">
+                    <button onclick="startRecording()">Start</button>
+                    <button onclick="stopRecording()">Stop</button>
+                </div>
+            </div>
+            <div id="output-box">
+                <div class="send-data-component">
+                    <h2>Transcribed Text</h2>
+                    <div id="output"></div>
+                </div>
+                <div class="btn-container">
+                    <button onclick="saveToExcel(false)">Save</button>
+                    <button onclick="clearOutput()">Clear</button>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <script src="../static/js/student.js"></script>
+</body>
+</html>
