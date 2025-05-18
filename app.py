@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font
 import os
@@ -6,6 +6,10 @@ import json     #to read, write & manipulate JSON data
 import random
 
 app = Flask(__name__)
+
+@app.route('/download/<filename>')
+def download(filename):
+    return send_file(filename, as_attachment=True)
 
 @app.route('/uploadQuestion', methods=['POST'])
 def uploadQuestion():
