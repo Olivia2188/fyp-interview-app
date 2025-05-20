@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font
 import os
@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/download/<filename>')
 def download(filename):
-    return send_file(filename, as_attachment=True)
+    return send_from_directory('generated_reports', filename, as_attachment=True)
 
 @app.route('/uploadQuestion', methods=['POST'])
 def uploadQuestion():
@@ -88,7 +88,7 @@ def start_interview():
 def save_transcription():
     data = request.get_json() #extract json data sent from fetch & turns it in python dictionary
     text = data.get("text", "") # extract the data in text, leave it empty if it's empty
-    name = data.get("name")
+    studentName = data.get("studentName")
     admin = data.get("admin")
     module = data.get("module")
     question = data.get("question")
@@ -97,7 +97,10 @@ def save_transcription():
     if not text.strip(): #strip remove leading/trailing spaces--> if text empty after removing spaces, carry actions
         return jsonify({"message": "No text to save!"}), 400  #400 means HTTP error (bad request, invalid input, users fault)
     
-    excel_path = f"{admin}_{module}_{name}.xlsx" #name of the excel file to save to"
+    filename = f"{admin}_{module}_{studentName}.xlsx" #name of the excel file"
+    folder = "generated_reports" #folder to store all the Excel files
+    os.makedirs(folder, exist_ok=True) # creates the folder if it doesn't exist
+    excel_path = os.path.join(folder, filename) # creates the correct full path string
 
     if os.path.exists(excel_path):
         wb = load_workbook(excel_path)
@@ -107,7 +110,7 @@ def save_transcription():
         ws = wb.active
     
         ws["A1"] = "Student Name"
-        ws["B1"] = name
+        ws["B1"] = studentName
         ws["A2"] = "Admin No"
         ws["B2"] = admin
         ws["A3"] = "Module Code"
@@ -130,7 +133,7 @@ def save_transcription():
     ws.cell(row=target_row, column=4, value=0)    #score
     ws.cell(row=target_row, column=5, value="")   #remarks
 
-    wb.save(excel_path)
+    wb.save(excel_path) # save excel to the correct folder
 
     return jsonify({"message": f"Save successfully as {excel_path}"}) #send response back to frontend
 
@@ -175,11 +178,11 @@ def index():
 @app.route('/save_student', methods=['POST'])
 def save_student():
     data = request.get_json()
-    name = data.get("name")
+    studentName = data.get("studentName")
     admin = data.get("admin")
     module = data.get("module")
 
-    print(f"Student Info received: {name}, {admin}, {module}")
+    print(f"Student Info received: {studentName}, {admin}, {module}")
 
     return jsonify({"success": True, "message": "Student info saved!"})
 

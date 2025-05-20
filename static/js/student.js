@@ -1,4 +1,6 @@
 window.onload = function(){
+    resetInterviewState(); //clear previous session
+
     initialisePage();
 
     document.getElementById("output-box").style.display = "none";
@@ -41,11 +43,11 @@ function displayQuestion(index){
     }
 }
 function initialisePage(){
-    let name = localStorage.getItem("studentName");
+    let studentName = localStorage.getItem("studentName");
     let admin = localStorage.getItem("adminNumber");
     let module = localStorage.getItem("moduleCode");
 
-    document.getElementById("displayName").innerText = name;
+    document.getElementById("displayName").innerText = studentName;
     document.getElementById("displayAdmin").innerText = admin;
     document.getElementById("displayModule").innerText = module;
 }
@@ -160,7 +162,7 @@ function saveToExcel(fromTimer = false){ //Saves data to Excel, fromTimer= true-
 
     clearInterval(countdownInterval);  //stop the timer if user pressed save
 
-    let name = localStorage.getItem("studentName"); //retrieve student info from local storage
+    let studentName = localStorage.getItem("studentName"); //retrieve student info from local storage
     let admin = localStorage.getItem("adminNumber");
     let module = localStorage.getItem("moduleCode");
 
@@ -178,7 +180,7 @@ function saveToExcel(fromTimer = false){ //Saves data to Excel, fromTimer= true-
         },
         body: JSON.stringify({
             text: transcribedText, 
-            name, 
+            studentName, 
             admin,
             module, 
             question,
@@ -201,6 +203,20 @@ function saveToExcel(fromTimer = false){ //Saves data to Excel, fromTimer= true-
         }
         else{
             alert("Interview finished!");
+
+            const studentName = localStorage.getItem("studentName");
+            const admin = localStorage.getItem("adminNumber");
+            const module = localStorage.getItem("moduleCode");
+
+            const filename = `${admin}_${module}_${studentName}.xlsx`;
+
+            const downloadLink = document.getElementById("downloadLink");
+            downloadLink.href = `/download/${filename}`;
+
+            document.getElementById("mainContent").style.display = "none";
+            document.getElementById("downloadSection").style.display = "flex";
+
+            return;
         }
     })
     .catch(error => console.error('Error:', error)); // handles errors
@@ -216,15 +232,15 @@ function clearOutput(){
 function saveInfo(event){
     event.preventDefault(); // stop default form submission, prevent reloading the page (allow fetch to carry out)
 
-    let name = document.getElementById("studentName").value;
+    let studentName = document.getElementById("studentName").value;
     let admin = document.getElementById("adminNumber").value;
     let module = document.getElementById("moduleCode").value;
 
-    if(name === "" || admin === "" || module === ""){
+    if(studentName === "" || admin === "" || module === ""){
         alert("Please fill in all fields");
         return;
     }
-    localStorage.setItem("studentName", name); //save student info to local storage(built-in browser feature to store small amt of data)
+    localStorage.setItem("studentName", studentName); //save student info to local storage(built-in browser feature to store small amt of data)
     localStorage.setItem("adminNumber", admin);
     localStorage.setItem("moduleCode", module);
 
@@ -233,7 +249,7 @@ function saveInfo(event){
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({name, admin, module})
+        body: JSON.stringify({studentName, admin, module})
     })
     .then(response => response.json())
     .then(data => {
@@ -249,11 +265,6 @@ let questions = []; //empty list, under fetch start interview, it will be filled
 let countdownInterval;
 
 function nextQns(){
-    if(currentQuestionIndex >= questions.length){ // index start counting from 0 so must be lesser than qns we have in qnslist
-        alert("Interview finished!");
-        return;
-    }
-
     responseSaved = false;  //reset the flag for next qns
 
     const q = questions[currentQuestionIndex]; //if index 0, get first row from shuffled list , including text,rubric....
@@ -288,4 +299,8 @@ function startCountdown(timeInSecs, onEnd){
             clearOutput();
         }
     }, 1000); // the time interval, runs the setInterval() repeatedly at this time interval (1000ms = 1 secs)
+}
+function resetInterviewState(){ //function to clear previous session data
+    localStorage.removeItem("questionList");
+    localStorage.removeItem("currentQuestionIndex");
 }

@@ -8,15 +8,16 @@ body {
     margin: 0px;
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: rgba(250, 235, 215, 0.62);
+    background-color: #e8f0ff;
+    color: #1a1a1a;
 }
 .headerBox{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: rgb(255, 255, 255, 0.6);
+    padding: 12px 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
 }
 header{
     font-size: 28px;
@@ -32,6 +33,7 @@ header img{
     text-align: justify;
     font-size: 20px;
     margin-bottom: 15px;
+    color: #555555;
 }
 #mainContent{
     display: grid;
@@ -57,7 +59,7 @@ header img{
 #questionBox,
 #recordSection,
 #output-box{
-    background: white;
+    background: #f9f9f9;
     border-radius: 15px;
     padding: 30px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -85,7 +87,7 @@ header img{
     padding-top: 50px;
     min-height: 400px;
     width: 85%;
-    background: rgb(255, 255, 255);
+    background: #f9f9f9;
 }
 .send-data-component img{
     margin: 10px auto;
@@ -179,5 +181,62 @@ header img{
     font-size: 18px;
     color: white;
     background-color: rgb(31, 95, 231);
+    cursor: pointer;
+}
+#downloadSection{
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    margin-top:100px;
+    box-sizing: border-box;
+}
+#downloadContainer{
+    padding: 45px 40px;
+    margin: auto;
+    width: 50%;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#downloadContain{
+    padding-bottom: 30px;
+}
+#downloadContain img{
+    margin: 10px auto;
+    width: 100px;
+}
+#downloadContain h1{
+    padding-bottom: 30px;
+}
+#downloadContain p{
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+#downloadBtn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    gap: 20px;
+}
+.downloadReport{
+    background-color: #1f5fe7;
+    color: #ffffff;
+    border: none;
+    text-decoration: none;
+    border-radius: 18px;
+    padding: 18px 35px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.backToHome{
+    background-color: #ffffff;
+    color: #1f5fe7;
+    border: 2px solid #1f5fe7;
+    text-decoration: none;
+    border-radius: 18px;
+    padding: 18px 35px;
+    font-size: 20px;
     cursor: pointer;
 }
