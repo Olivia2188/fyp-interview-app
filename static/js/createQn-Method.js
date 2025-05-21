@@ -3,8 +3,7 @@ function showpopup(){
     popupWindow.style.display = "flex";
     popupWindow.style.backgroundColor = "#090909cc";
 
-    let backbtn = document.querySelector('.popupBackbtn');
-    backbtn.style.display = "none";
+    document.querySelector('.popupBackbtn').style.display = "none";
 }
 function closepopup(){
     let popupWindow = document.querySelector(".popupWindow");
@@ -22,7 +21,7 @@ function closepopup(){
     let upload = document.querySelector('.upload');
     upload.style.display = "block";
 
-    let downloadbtn = document.querySelector('.popupdownloadbtn');
+    let downloadbtn = document.querySelector('.popupBtn');
     downloadbtn.style.display = "block";
 
     let area = document.querySelector('.uploadArea');
@@ -74,10 +73,9 @@ function uploadExcel(file){
             let area = document.querySelector('.uploadArea');
             area.style.justifyContent = 'flex-start';
 
-            let backbtn = document.querySelector('.popupBackbtn');
-            backbtn.style.display = "block";
+            document.querySelector('.popupBackbtn').style.display = "inline-block";
 
-            let downloadbtn = document.querySelector('.popupdownloadbtn');
+            let downloadbtn = document.querySelector('.popupBtn');
             downloadbtn.style.display = "none";
 
             let table = `
@@ -114,10 +112,9 @@ function uploadExcel(file){
     .catch(error => console.error('Error:', error));
 }
 function back(){
-    let backbtn = document.querySelector('.popupBackbtn');
-    backbtn.style.display = "none";
+    document.querySelector('.popupBackbtn').style.display = "none";
 
-    let downloadbtn = document.querySelector('.popupdownloadbtn');
+    let downloadbtn = document.querySelector('.popupBtn');
     downloadbtn.style.display = "block";
 
     let upload = document.querySelector('.upload');

@@ -18,20 +18,29 @@
         </div>
         <div class="selectionContainer">
             <div class="selection">
-                <h3>Bring your own content</h3>
-                <p>Upload from an Excel file</p>
-                <div class="selectionimg">
-                    <img src="../static/image/excelIcon.png">
+                <div class="selectionContent">
+                    <h3>Upload Questions & Rubrics</h3>
+                    <p>By using Excel format</p>
+                    <div class="selectionimg">
+                        <img src="../static/image/excelIcon.png">
+                    </div>
+                    <div class="selectiondownloadbtn">
+                        <a class="selectionbtnContainer" href="../static/sample_questions.xlsx" download="SampleSpreadSheet">
+                            <span>Download template sample</span>
+                        </a>
+                    </div>
                 </div>
                 <div class="selectionbtn">
                     <button onclick="showpopup()">Import Content</button>
                 </div>
             </div>
             <div class="selection">
-                <h3>Create from scratch</h3>
-                <p>Custom questions & rubrics</p>
-                <div class="selectionimg">
-                    <img src="../static/image/scratch.jpg">
+                <div class="selectionContent">
+                    <h3>Create from scratch</h3>
+                    <p>Custom questions & rubrics</p>
+                    <div class="selectionimg">
+                        <img src="../static/image/scratch.jpg">
+                    </div>
                 </div>
                 <div class="selectionbtn">
                     <button onclick="scratchpage()">Start creating</button>
@@ -59,22 +68,16 @@
                 </div>
             </div>
             <div class="popupActions">
-                <div class="downloadTemplate">
-                    <div class="popupBtn">
-                        <div class="popupdownloadbtn">
-                            <a class="popupbtnContainer" href="../static/sample_questions.xlsx" download="SampleSpreadSheet">
-                                <img class="popupExcel" src="../static/image/excel-img.png">
-                                <span>Download template sample</span>
-                            </a>
-                        </div>
-                        <div class="popupbtnContainer">
-                            <button class="popupBackbtn" onclick="back()">
-                                <i class="fa fa-arrow-left"></i>
-                                <span>Back</span>
-                            </button>
-                        </div>
-                    </div>
+                <div class="popupBtn">
+                    <a class="popupbtnContainer" href="../static/sample_questions.xlsx" download="SampleSpreadSheet">
+                        <img class="popupExcel" src="../static/image/excel-img.png">
+                        <span>Download template sample</span>
+                    </a>
                 </div>
+                <button class="popupBackbtn" onclick="back()">
+                    <i class="fa fa-arrow-left"></i>
+                    <span>Back</span>
+                </button>
                 <div class="actionsBtn">
                     <button onclick="closepopup()" class="cancelBtn">Cancel</button>
                     <button class="importBtn" disabled onclick="confirmImport()">Import</button>
