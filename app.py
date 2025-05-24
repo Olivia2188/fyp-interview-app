@@ -9,8 +9,8 @@ app = Flask(__name__)
 
 def evaluate_with_AI(answer, rubric, maxMark):
     endpoint = "https://openrouter.ai/api/v1/chat/completions" #endpoint: whr u send  request to(API URL)
-    api_token = "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"
-
+    api_token = os.getenv("OPENROUTER_API_KEY")
+    
     prompt = (
         f"Rubric: {rubric}\n"
         f"Max mark: {maxMark}\n"
