@@ -5,9 +5,39 @@ import os
 import json     #to read, write & manipulate JSON data
 import random
 import requests
-
 app = Flask(__name__)
 
+def evaluate_with_AI(answer, rubric, maxMark):
+    endpoint = "https://openrouter.ai/api/v1/chat/completions" #endpoint: whr u send  request to(API URL)
+    api_token = "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"
+
+    prompt = (
+        f"Rubric: {rubric}\n"
+        f"Max mark: {maxMark}\n"
+        f"Student's answer: {answer}\n"
+        f"Based on the rubric and max mark, give a score and a reason."
+        f"Keep the score within the max mark. Format: 'Score: X/Y | Reason: ... '"
+    )
+    headers = { #include extra information for server
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {api_token}" #tell API who am I, use the token to log in, not allowed to use if dk who am I 
+    }
+    payload = { #actual data sending to AI
+        "model": "mistralai/mistral-7b-instruct",
+        "messages":[  #tells AI who's speaking n what they speaking(content)
+            {"role": "system","content": "You are an assistant that grades answers based on the rubrics."}, #setting the environment, telling the role
+            {"role": "user", "content": prompt} #user is the one giving instructions, send in instructions under 'content'
+        ]
+    }
+
+    response = requests.post(endpoint, headers=headers, json=payload) #sends HTTP POST request
+
+    if response.status_code == 200: #success(ok)
+        return response.json()["choices"][0]["message"]["content"]
+    else:
+        print("AI Evaluation Error:", response.status_code, response.text)
+        return "Evaluation failed."
+        
 @app.route('/download/<filename>')
 def download(filename):
     return send_from_directory('generated_reports', filename, as_attachment=True)
@@ -128,11 +158,30 @@ def save_transcription():
     target_row = int(index) + 6 #calculating row: index 0 = row 6, index 1 = row 7...
     serial = int(index) + 1
 
+    
+    with open("uploadQuestion.json", "r") as f: #open the file in read mode(comes from /uploadQuestion)
+        allQuestions = json.load(f) #load the JSON data from f, convert to python dic and save it under allQuestions
+
+    currentQn = allQuestions[int(index)]
+    rubric = currentQn["rubric"]
+    maxMark = currentQn["marks"]
+
+    aiResult = evaluate_with_AI(text, rubric, maxMark) #text is student transcribed text(from this func), rubric & maxMark alr declare on top
+
+    try:
+        score_part, reason_part = aiResult.split("|")
+        score = score_part.strip().replace("Score:","").split("/")[0].strip()
+        reason = reason_part.strip().replace("Reason:", "").strip()
+    except:
+        score = 0
+        reason = "Unable to parse AI result"
+
     ws.cell(row=target_row, column=1, value=serial)   #serial no.
     ws.cell(row=target_row, column=2, value=question)   #question
     ws.cell(row=target_row, column=3, value=text)    #transcribed text
-    ws.cell(row=target_row, column=4, value=0)    #score
-    ws.cell(row=target_row, column=5, value="")   #remarks
+    ws.cell(row=target_row, column=4, value=score)   #Score
+    ws.cell(row=target_row, column=5, value=reason)  #rationale behind
+
 
     wb.save(excel_path) # save excel to the correct folder
 

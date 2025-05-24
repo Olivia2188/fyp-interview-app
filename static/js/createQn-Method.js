@@ -106,6 +106,7 @@ function uploadExcel(file){
             container.innerHTML = table;
         } else if (data.error) {
             alert('Error: ' + data.error);
+            document.querySelector('.importBtn').disabled = true;
             return;
         }
     })
@@ -136,5 +137,6 @@ function scratchpage(){
     window.location.href = "/createfromScratch";
 }
 function confirmImport(){
-    window.location.href ="/createfromScratch";
+    alert("Questions have been successfully imported.");
+    closepopup();
 }

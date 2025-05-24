@@ -51,12 +51,15 @@ body{
 }
 .selectionimg img{
     width: 130px;
-    height: 130px;
+    height: 120px;
     padding: 20px 0;
+}
+.selectiondownloadbtn{
+    padding-bottom: 3px;
 }
 .selectionbtn button{
     padding: 10px 25px;
-    font-size: 25px;
+    font-size: 23px;
     cursor: pointer;
     border-radius: 15px;
     color: rgb(255, 255, 255);
