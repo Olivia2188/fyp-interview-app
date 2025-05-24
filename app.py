@@ -1,16 +1,44 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font
+from datetime import datetime
 import os
 import json     #to read, write & manipulate JSON data
 import random
 import requests
 app = Flask(__name__)
 
+@app.route("/view_reports")
+def view_reports():
+    reports_folder = os.path.join("static", "generated_reports")
+    files = os.listdir(reports_folder) # creates the folder if it doesn't exist
+
+    reports = []
+    for f in files:
+        if f.endswith(".xlsx"):
+            parts = f.replace(".xlsx", "").split("_")
+            if len(parts) == 3:
+                admin, module, name = parts
+                file_path = os.path.join(reports_folder, f)
+                data_created = datetime.fromtimestamp(os.path.getctime(file_path)).strftime("%Y-%m-%d")
+                reports.append({
+                    "name": name,
+                    "admin": admin,
+                    "module": module,
+                    "date": data_created,
+                    "filename": f
+                })
+    return render_template("teacher-viewReport.html", reports=reports)
+
+@app.route("/download_report/<filename>")
+def download_report(filename):
+    reports_folder = os.path.join("static", "generated_reports")
+    return send_from_directory(reports_folder, filename, as_attachment=True)
+
 def evaluate_with_AI(answer, rubric, maxMark):
     endpoint = "https://openrouter.ai/api/v1/chat/completions" #endpoint: whr u send  request to(API URL)
     api_token = os.getenv("OPENROUTER_API_KEY")
-    
+
     prompt = (
         f"Rubric: {rubric}\n"
         f"Max mark: {maxMark}\n"
@@ -129,7 +157,7 @@ def save_transcription():
         return jsonify({"message": "No text to save!"}), 400  #400 means HTTP error (bad request, invalid input, users fault)
     
     filename = f"{admin}_{module}_{studentName}.xlsx" #name of the excel file"
-    folder = "generated_reports" #folder to store all the Excel files
+    folder = os.path.join("static", "generated_reports") #folder to store all the Excel files
     os.makedirs(folder, exist_ok=True) # creates the folder if it doesn't exist
     excel_path = os.path.join(folder, filename) # creates the correct full path string
 

@@ -136,6 +136,9 @@ function back(){
 function scratchpage(){
     window.location.href = "/createfromScratch";
 }
+function viewReport(){
+    window.location.href = "/view_reports";
+}
 function confirmImport(){
     alert("Questions have been successfully imported.");
     closepopup();
