@@ -64,8 +64,8 @@ function startRecording(){
     }
 
     recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.continuous= true;
-    recognition.interimResults = true;
+    recognition.continuous= true; //keep running after pauses so students can give longer answer
+    recognition.interimResults = true; //allows system shows result while student still speaking
     recognition.lang = ""; //Auto-detect language
 
     document.querySelector("#recordSection .send-data-img").style.display = "none"; // hide img and description when start is being pressed
@@ -204,17 +204,8 @@ function saveToExcel(fromTimer = false){ //Saves data to Excel, fromTimer= true-
         else{
             alert("Interview finished!");
 
-            const studentName = localStorage.getItem("studentName");
-            const admin = localStorage.getItem("adminNumber");
-            const module = localStorage.getItem("moduleCode");
-
-            const filename = `${admin}_${module}_${studentName}.xlsx`;
-
-            const downloadLink = document.getElementById("downloadLink");
-            downloadLink.href = `/download/${filename}`;
-
             document.getElementById("mainContent").style.display = "none";
-            document.getElementById("downloadSection").style.display = "flex";
+            document.getElementById("finishSection").style.display = "flex";
 
             return;
         }

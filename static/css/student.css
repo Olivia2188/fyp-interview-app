@@ -183,7 +183,7 @@ header img{
     background-color: rgb(31, 95, 231);
     cursor: pointer;
 }
-#downloadSection{
+#finishSection{
     display: none;
     flex-direction: column;
     width: 100%;
@@ -191,44 +191,34 @@ header img{
     margin-top:100px;
     box-sizing: border-box;
 }
-#downloadContainer{
+#finishContainer{
     padding: 45px 40px;
     margin: auto;
     width: 50%;
     background: #ffffff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-#downloadContain{
+#finishContain{
     padding-bottom: 30px;
 }
-#downloadContain img{
+#finishContain img{
     margin: 10px auto;
     width: 100px;
 }
-#downloadContain h1{
+#finishContain h1{
     padding-bottom: 30px;
 }
-#downloadContain p{
+#finishContain p{
     font-size: 20px;
     padding-bottom: 20px;
 }
-#downloadBtn{
+#finishBtn{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     gap: 20px;
-}
-.downloadReport{
-    background-color: #1f5fe7;
-    color: #ffffff;
-    border: none;
-    text-decoration: none;
-    border-radius: 18px;
-    padding: 18px 35px;
-    font-size: 20px;
-    cursor: pointer;
 }
 .backToHome{
     background-color: #ffffff;

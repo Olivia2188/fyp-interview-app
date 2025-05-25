@@ -10,6 +10,8 @@
 </head>
 <body>
     <h2>Student Reports</h2>
+
+    {% if reports %}
     <table>
         <thead>
             <tr>
@@ -20,19 +22,23 @@
                 <th>Download</th>
             </tr>
         </thead>
+        <tbody>
+            {% for report in reports %}
+            <tr>
+                <td>{{ report.name }}</td>
+                <td>{{ report.admin }}</td>
+                <td>{{ report.module }}</td>
+                <td>{{ report.date }}</td>
+                <td>
+                    <a class="download-btn" href="{{ url_for('download_report', filename=report.filename) }}">Download</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-    <tbody>
-        {% for report in repors %}
-        <tr>
-            <td>{{ report.name }}</td>
-            <td>{{ report.admin }}</td>
-            <td>{{ report.module }}</td>
-            <td>{{ report.date }}</td>
-            <td>
-                <a class="download-btn" href="{{ url_for('download_report', filename=report.filename) }}">Download</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+    {% else %}
+        <p>No reports found yet!</p>
+    {% endif %}
+    
 </body>
 </html>

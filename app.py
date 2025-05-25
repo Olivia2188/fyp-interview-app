@@ -1,16 +1,21 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font
+from dotenv import load_dotenv
 from datetime import datetime
 import os
 import json     #to read, write & manipulate JSON data
 import random
 import requests
+
 app = Flask(__name__)
+
+load_dotenv()
 
 @app.route("/view_reports")
 def view_reports():
-    reports_folder = os.path.join("static", "generated_reports")
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    reports_folder = os.path.join(BASE_DIR, "static", "generated_reports")
     files = os.listdir(reports_folder) # creates the folder if it doesn't exist
 
     reports = []
@@ -157,7 +162,8 @@ def save_transcription():
         return jsonify({"message": "No text to save!"}), 400  #400 means HTTP error (bad request, invalid input, users fault)
     
     filename = f"{admin}_{module}_{studentName}.xlsx" #name of the excel file"
-    folder = os.path.join("static", "generated_reports") #folder to store all the Excel files
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    folder = os.path.join(BASE_DIR, "static", "generated_reports") #folder to store all the Excel files
     os.makedirs(folder, exist_ok=True) # creates the folder if it doesn't exist
     excel_path = os.path.join(folder, filename) # creates the correct full path string
 
