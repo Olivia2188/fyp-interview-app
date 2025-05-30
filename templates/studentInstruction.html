@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Instruction Page</title>
+    <link rel="stylesheet" href="../static/css/studentInstruction.css">
+</head>
+<body>
+    <section class="instructionContainer">
+        <div class="instruction">
+            <h1>Interview Instructions</h1>
+            <p>You are about to begin your AI-conducted oral interview.</p>
+            <p>Please read the following instructions carefully before proceeding:</p>
+            
+            <ul>
+                <li>Once you click <strong>Start</strong>, the first question will appear immediately.</li>
+                <li>Each question has a specifiv time limit. A countdown timer will be shown.</li>
+                <li>You must speak your response clearly into the microphone. Your response will be transcribed live.</li>
+                <li>After answering, click the <strong>Save</strong> button to proceed to the next question.</li>
+                <li>Once time is up, the system will automatically save your response and proceed to the next question.</li>
+                <li>Please remain on this page and do not refresh the page during the interview.</li>
+            </ul>
+
+            <p>Click the button below when you are ready to begin.</p>
+            <div class="startBtn">
+                <button onclick="window.location.href='/student'">
+                    Start Interview
+                </button>
+            </div>
+        </div>
+    </section>
+    <script src="../static/js/student.js"></script>
+</body>
+</html>

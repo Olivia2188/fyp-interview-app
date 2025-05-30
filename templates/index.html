@@ -11,21 +11,18 @@
     <header>
         <section class="header">
             <nav>
-                <a href="index.html"><img src="../static/image/logo.png"></a>
+                <a href="/"><img src="../static/image/logo.png"></a>
                 <div class="nav-links" id="navLinks">
                     <div class="nav-left">
                         <i class="fa fa-times" onclick="hideMenu()"></i>
                         <ul>
-                            <li><a href="">Home</a> </li>
-                            <li><a href="">About</a> </li>
-                            <li><a href="">Support</a> </li>
+                            <li><a href="/">Home</a> </li>
                         </ul>
                     </div>
                     <div class="nav-right">
                         <ul>
-                            <li><a href="">Enter code</a></li>
-                            <li><a href="">Sign up</a></li>
-                            <li><a href="">Login</a></li>
+                            <li><a href="/qnMethod">Teachers</a></li>
+                            <li><a href="/studentInfo">Students</a></li>
                         </ul>
                     </div>
                 </div>
@@ -47,81 +44,5 @@
         </div>
         </section>
     </header>
-<!----Features start-->
-    <section class="features">
-        <h1>Key Capabilities of Our System</h1>
-        <p> &#42 Hover to see more</p>
-        <div class="fea-base">
-            <div class="fea-card">
-                <img src="../static/image/speech-to-text.png">
-                <h3>Speech-to-Text Conversion</h3>
-                <div class="fea-card-hover">
-                    <i class="fa fa-file-text"></i>
-                    <p>Automatically transcribes student responses for accurate record keeping.</p>
-                </div>
-            </div>
-            <div class="fea-card">
-                <img src="../static/image/evaluation-img.png">
-                <h3>AI-based Evaluation</h3>
-                <div class="fea-card-hover">
-                    <i class="fa fa-laptop"></i>
-                    <p>Evaluates responces using teacher-defined rubrics and provides suggestion for improvement.</p>
-                </div>
-            </div>
-            <div class="fea-card">
-                <img src="../static/image/excel-img.png">
-                <h3>Automated Report Generation</h3>
-                <div class="fea-card-hover">
-                    <i class="fa fa-book"></i>
-                    <p>Generates Excels report summarising student performance and feedback.</p>
-                </div>
-            </div>
-            <div class="fea-card">
-                <img src="../static/image/user-frndly-icon.png">
-                <h3>User-Friendly Interface</h3>
-                <div class="fea-card-hover">
-                    <i class="fa fa-users"></i>
-                    <p>Allows teachers to easily create questions, define rubrics and review results.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-<!-----Features end-->
-<!----Workflow start---->
-    <section class="introduction">
-        <div class="intro-img">
-            <img src="../static/image/intro-img.png">
-        </div>
-        <div class="intro-text">
-            <h5>Automated Student Interview & Evaluation System</h5>
-            <h2>How Our system works</h2>
-            <ul class="pt">
-                <li>Teacher Setup:</li>
-                <p>Define rubrics and create interview questions.</p>
-                <li>Student Interview:</li>
-                <p>Students enter their information and respond to the question being assigned.</p>
-                <li>AI Evaluation:</li>
-                <p>AI scores responces and provides rubric-based feedback.</p>
-                <li>Data Storage:</li>
-                <p>All interview data is securely stored.</p>
-                <li>Report Generation:</li>
-                <p>Automated Excel reports summasising results are generated.</p>
-                <li>Feedback Collection:</li>
-                <p>Gather user feedback for continuous system improvement.</p>
-        </div>
-    </section>
-    <section class="">
-             <button>Set Up a Class</button>
-    </section>
-<!--JavaScript for toggle menu-->
-<script>
-    var navLinks = document.getElementById("navLinks");
-    function showMenu(){
-        navLinks.style.right = "0";
-    }
-    function hideMenu(){
-        navLinks.style.right = "-250px";
-    }
-</script>
 </body>
 </html>

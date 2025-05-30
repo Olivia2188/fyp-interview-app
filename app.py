@@ -192,15 +192,16 @@ def save_transcription():
     target_row = int(index) + 6 #calculating row: index 0 = row 6, index 1 = row 7...
     serial = int(index) + 1
 
+    rubric = data.get("rubric")
+    maxMark = data.get("maxMark")
+    if not rubric or not maxMark:
+        return jsonify({"message": "Missing rubric or max mark"}), 400
     
-    with open("uploadQuestion.json", "r") as f: #open the file in read mode(comes from /uploadQuestion)
-        allQuestions = json.load(f) #load the JSON data from f, convert to python dic and save it under allQuestions
-
-    currentQn = allQuestions[int(index)]
-    rubric = currentQn["rubric"]
-    maxMark = currentQn["marks"]
-
     aiResult = evaluate_with_AI(text, rubric, maxMark) #text is student transcribed text(from this func), rubric & maxMark alr declare on top
+
+    if "Score:" not in aiResult or "Reason:" not in aiResult or "|" not in aiResult: #Retry once if result seems invalid
+        print("Retrying AI due to bad format:", aiResult)
+        aiResult = evaluate_with_AI(text, rubric, maxMark)
 
     try:
         score_part, reason_part = aiResult.split("|")
@@ -239,10 +240,6 @@ def student():
 def studentInfo():
     return render_template('studentInfo.html')
 
-@app.route('/questionInfo')
-def questionInfo():
-    return render_template('questionInfo.html')
-
 @app.route('/inputQuestion')
 def inputQuestion():
     return render_template('inputQuestion.html')
@@ -269,6 +266,9 @@ def save_student():
     print(f"Student Info received: {studentName}, {admin}, {module}")
 
     return jsonify({"success": True, "message": "Student info saved!"})
+@app.route('/studentInstructions')
+def studentInstructions():
+    return render_template('studentInstruction.html')
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))

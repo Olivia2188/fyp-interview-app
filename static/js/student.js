@@ -1,6 +1,5 @@
 window.onload = function(){
     resetInterviewState(); //clear previous session
-
     initialisePage();
 
     document.getElementById("output-box").style.display = "none";
@@ -169,6 +168,7 @@ function saveToExcel(fromTimer = false){ //Saves data to Excel, fromTimer= true-
     const questions = JSON.parse(localStorage.getItem("questionList"));
     const index = parseInt(localStorage.getItem("currentQuestionIndex") || "0");
     const question = questions?.[index]?.text;
+    const currentQn = questions[index];
     if(!question){
         document.getElementById("questionBox").innerText = "No question found.";
         return;
@@ -184,7 +184,10 @@ function saveToExcel(fromTimer = false){ //Saves data to Excel, fromTimer= true-
             admin,
             module, 
             question,
-            index: localStorage.getItem("currentQuestionIndex")}) // send transcribedText... to server as JSON string
+            index: localStorage.getItem("currentQuestionIndex"),  // send transcribedText... to server as JSON string
+            rubric: currentQn.rubric,
+            maxMark: currentQn.marks
+        }) 
     })
     .then(response => response.json()) // Convert response backinto JS object
     .then(data => {
@@ -245,7 +248,7 @@ function saveInfo(event){
     .then(response => response.json())
     .then(data => {
         alert(data.message);
-        window.location.href = "/student"; // redirect to the page
+        window.location.href = "/studentInstructions"; // redirect to the page
     })
     .catch(error => console.error("Error:", error));
 }

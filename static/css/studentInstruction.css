@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: #f7f9fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.instructionContainer{
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    max-width: 600px;
+    text-align: left;
+}
+.instructionContainer h1{
+    margin-bottom: 20px;
+    font-size: 28px;
+    text-align: center;
+}
+.instructionContainer p{
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+.instructionContainer ul{
+    padding-left: 20px;
+    margin-bottom: 30px;
+}
+.instructionContainer li{
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+.startBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button{
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #34495e;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+button:hover{
+    opacity: 0.9;
+}
