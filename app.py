@@ -204,12 +204,12 @@ def save_transcription():
         aiResult = evaluate_with_AI(text, rubric, maxMark)
 
     try:
-        score_part, reason_part = aiResult.split("|")
+        score_part, reason_part = aiResult.split("|", 1)
         score = score_part.strip().replace("Score:","").split("/")[0].strip()
         reason = reason_part.strip().replace("Reason:", "").strip()
     except:
         score = 0
-        reason = "Unable to parse AI result"
+        reason = aiResult
 
     ws.cell(row=target_row, column=1, value=serial)   #serial no.
     ws.cell(row=target_row, column=2, value=question)   #question
