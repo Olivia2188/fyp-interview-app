@@ -56,7 +56,7 @@ def evaluate_with_AI(answer, rubric, maxMark):
         "Authorization": f"Bearer {api_token}" #tell API who am I, use the token to log in, not allowed to use if dk who am I 
     }
     payload = { #actual data sending to AI
-        "model": "mistralai/mistral-7b-instruct",
+        "model": "mistralai/mistral-small-3.1-24b-instruct:free",
         "messages":[  #tells AI who's speaking n what they speaking(content)
             {"role": "system","content": "You are an assistant that grades answers based on the rubrics."}, #setting the environment, telling the role
             {"role": "user", "content": prompt} #user is the one giving instructions, send in instructions under 'content'
