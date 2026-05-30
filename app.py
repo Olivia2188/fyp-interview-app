@@ -68,8 +68,7 @@ def evaluate_with_AI(answer, rubric, maxMark):
     if response.status_code == 200: #success(ok)
         return response.json()["choices"][0]["message"]["content"]
     else:
-        print("AI Evaluation Error:", response.status_code, response.text)
-        return "Evaluation failed."
+        return f"Score: 0/{maxMark} | Reason: AI Evaluation Error {response.status_code}: {response.text[:200]}"
         
 @app.route('/download/<filename>')
 def download(filename):
